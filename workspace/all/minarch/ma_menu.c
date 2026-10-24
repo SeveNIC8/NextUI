@@ -1930,7 +1930,7 @@ void Menu_loop(void) {
 					show_menu = 0;
 				break;
 				case ITEM_EJECT:
-					if (disc_inserted > 0 && Game_setDiscEjectState(1)) {
+					if (menu.total_discs > 0 && disc_inserted > 0 && Game_setDiscEjectState(1)) { // disable eject if no disc inserted or no disc drive
 						tray_state = Game_getDiscEjectState();
 						disc_inserted = Game_getDiscInsertedState();
 						if (tray_state >= 0 && disc_inserted >= 0) {
@@ -2055,7 +2055,7 @@ void Menu_loop(void) {
 						SCALE1(PILL_SIZE)
 					});
 				}
-				if (item_id==ITEM_EJECT && disc_inserted <= 0) {
+				if (item_id==ITEM_EJECT && (disc_inserted <= 0 || menu.total_discs <= 0)) { // disable eject if no disc inserted or no disc drive
 					text_color = uintToColour(THEME_COLOR3_255);
 				}
 				
